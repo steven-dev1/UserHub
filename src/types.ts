@@ -15,3 +15,9 @@ export interface User {
 export interface UserList {
     users: User[]
 }
+
+export interface PaginationProps {
+  page: number;
+  setPage: (page: number) => void;
+  userLength: number;
+}
