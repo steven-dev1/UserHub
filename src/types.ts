@@ -21,3 +21,16 @@ export interface PaginationProps {
   setPage: (page: number) => void;
   totalpages: number;
 }
+
+export interface UsersState {
+  apiUsersByPage: {
+    [page: number]: User[];
+  };
+  apiUsers: User[];
+  manualUsers: User[];
+  loading: boolean;
+  error: string | null;
+  fetchedPages: number[];
+  filter: string;
+  editingUser: User | null;
+}

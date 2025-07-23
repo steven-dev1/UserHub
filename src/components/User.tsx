@@ -1,19 +1,31 @@
 import { Mail, Pencil, Trash2 } from "lucide-react";
 import type { User as UserType } from "../types";
 import { useAppDispatch } from "../redux/hooks";
-import { setEditingUser } from "../redux/usersSlice";
+import { deleteUser, setEditingUser } from "../redux/usersSlice";
+import { useState } from "react";
+import { Button } from "./Button";
 
 export const User = ({ user }: { user: UserType }) => {
   const dispatch = useAppDispatch();
   const avatar = user.avatar != "" || user.avatar ? user.avatar : "/avatar-default.svg";
+  const [openDeleteModal, setOpenDeleteModal] = useState(false);
+
+  const handleOpenDeleteModal = () => {
+    dispatch(deleteUser(user.id));
+    setOpenDeleteModal(!openDeleteModal);
+  };
   return (
     <div
       key={user.id}
       className="p-4 relative group bg-blue-50 rounded-lg flex flex-col items-center"
     >
+      <div className={`absolute flex-col rounded-lg gap-1 top-0 left-0 w-full h-full bg-black/50 backdrop-blur-xs flex items-center justify-center z-50 transition-all duration-150 ${openDeleteModal ? "scale-100 opacity-100" : "scale-0 opacity-0"}`}>
+        <Button onClick={handleOpenDeleteModal}>Confirmar</Button>
+        <button onClick={() => setOpenDeleteModal(false)} className="text-white transition-all duration-100 p-2 rounded-full text-sm font-semibold cursor-pointer hover:bg-red-200 hover:text-red-600">Cancelar</button>
+      </div>
       <div className="absolute transition-all duration-150 flex top-2 right-2 opacity-100 md:opacity-0 group-hover:opacity-100">
         <button onClick={() => dispatch(setEditingUser(user))} className="cursor-pointer hover:bg-blue-200 p-2 rounded-full"><Pencil strokeWidth="2.5" size={18} /></button>
-        <button onClick={() => dispatch(setEditingUser(user))} className="cursor-pointer hover:bg-red-200 p-2 rounded-full"><Trash2 strokeWidth="2.5" color="red" size={18} /></button>
+        <button onClick={() => setOpenDeleteModal(true)} className="cursor-pointer hover:bg-red-200 p-2 rounded-full"><Trash2 strokeWidth="2.5" color="red" size={18} /></button>
       </div>
       <img
         src={avatar}

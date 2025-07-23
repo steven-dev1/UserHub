@@ -103,6 +103,20 @@ export const NewUserForm = ({ isOpen, onClose }: NewUserFormProps) => {
             className="bg-blue-100 text-sm py-2 px-4 rounded-full outline-none"
           />
         </div>
+        <div className="flex flex-col gap-2">
+          <label htmlFor="avatar" className="text-sm font-bold">
+            Avatar
+          </label>
+          <input
+          onChange={(e) => handleChange(e)}
+            placeholder="https://example.com/avatar.jpg"
+            required
+            type="text"
+            name="avatar"
+            id="avatar"
+            className="bg-blue-100 text-sm py-2 px-4 rounded-full outline-none"
+          />
+        </div>
         <div className="flex justify-end gap-2">
           <Button>
             <Plus /> Crear

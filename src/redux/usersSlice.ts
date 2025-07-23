@@ -7,30 +7,7 @@ import {
 import { getUsers } from "../utils";
 import type { User } from "../types";
 import type { RootState } from "./store";
-
-interface UsersState {
-  apiUsersByPage: {
-    [page: number]: User[];
-  };
-  apiUsers: User[];
-  manualUsers: User[];
-  loading: boolean;
-  error: string | null;
-  fetchedPages: number[];
-  filter: string;
-  editingUser: User | null;
-}
-
-const initialState: UsersState = {
-  apiUsersByPage: {},
-  apiUsers: [],
-  manualUsers: [],
-  loading: false,
-  error: null,
-  fetchedPages: [],
-  filter: "",
-  editingUser: null,
-};
+import { initialState } from "../utils";
 
 export const fetchUsers = createAsyncThunk(
   "users/fetchUsers",
@@ -77,7 +54,7 @@ const usersSlice = createSlice({
       if (apiIndex !== -1) {
         state.apiUsers[apiIndex] = user;
       }
-      
+
       for (const page in state.apiUsersByPage) {
         const pageIndex = state.apiUsersByPage[page].findIndex(
           (u) => u.id === user.id
@@ -88,9 +65,19 @@ const usersSlice = createSlice({
       }
     },
     deleteUser: (state, action: PayloadAction<string>) => {
+      const userId = action.payload;
+
       state.manualUsers = state.manualUsers.filter(
-        (u) => u.id !== action.payload
+        (user) => user.id !== userId
       );
+
+      state.apiUsers = state.apiUsers.filter((user) => user.id !== userId);
+
+      for (const page in state.apiUsersByPage) {
+        state.apiUsersByPage[page] = state.apiUsersByPage[page].filter(
+          (user) => user.id !== userId
+        );
+      }
     },
     setFilter: (state, action: PayloadAction<string>) => {
       state.filter = action.payload;

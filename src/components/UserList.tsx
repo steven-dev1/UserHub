@@ -8,7 +8,6 @@ import { Pagination } from "./Pagination";
 import { USERS_PER_PAGE } from "../utils";
 import { UserListHeader } from "./UserListHeader";
 import { EditUserForm } from "./EditUserForm";
-// import { filterUsers } from "../utils";
 
 export const UserList = () => {
   const [isOpen, setIsOpen] = useState(false);

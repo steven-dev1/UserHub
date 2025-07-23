@@ -1,3 +1,4 @@
+import type { UsersState } from "./types";
 
 
 export const getUsers = async (page: number) => {
@@ -15,6 +16,15 @@ export const getUsers = async (page: number) => {
   return data;
 }
 
-
-
 export const USERS_PER_PAGE = 6;
+
+export const initialState: UsersState = {
+  apiUsersByPage: {},
+  apiUsers: [],
+  manualUsers: [],
+  loading: false,
+  error: null,
+  fetchedPages: [],
+  filter: "",
+  editingUser: null,
+};
