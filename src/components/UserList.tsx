@@ -38,6 +38,10 @@ export const UserList = () => {
   // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
+  useEffect(() => {
+    setPage(1);
+  }, []);
+
   return (
     <div className="p-4 w-full flex flex-col items-center gap-2">
       {editingUser && <EditUserForm />}

@@ -50,14 +50,12 @@ export const NewUserForm = ({ isOpen, onClose }: NewUserFormProps) => {
 
   return (
     <div
-      onClick={handleClose}
       className={`fixed w-screen h-screen bg-black/50 backdrop-blur-xs top-0 left-0 flex items-center justify-center z-50 ${
         isOpen ? "flex" : "hidden"
       }`}
     >
       <form
         onSubmit={handleSubmit}
-        onClick={(e) => e.stopPropagation()}
         className="bg-white p-6 rounded-lg shadow-lg w-[500px] flex flex-col gap-4"
       >
         <h2 className="text-2xl font-bold">Crear usuario</h2>
@@ -69,6 +67,7 @@ export const NewUserForm = ({ isOpen, onClose }: NewUserFormProps) => {
           onChange={(e) => handleChange(e)}
             placeholder="Auron"
             required
+            value={formData.first_name}
             type="text"
             name="first_name"
             id="first_name"
@@ -83,6 +82,7 @@ export const NewUserForm = ({ isOpen, onClose }: NewUserFormProps) => {
           onChange={(e) => handleChange(e)}
             placeholder="Play"
             required
+            value={formData.last_name}
             type="text"
             name="last_name"
             id="last_name"
@@ -97,6 +97,7 @@ export const NewUserForm = ({ isOpen, onClose }: NewUserFormProps) => {
           onChange={(e) => handleChange(e)}
             placeholder="auronplay@gmail.com"
             required
+            value={formData.email}
             type="email"
             name="email"
             id="email"
@@ -112,6 +113,7 @@ export const NewUserForm = ({ isOpen, onClose }: NewUserFormProps) => {
             placeholder="https://example.com/avatar.jpg"
             required
             type="text"
+            value={formData.avatar}
             name="avatar"
             id="avatar"
             className="bg-blue-100 text-sm py-2 px-4 rounded-full outline-none"
