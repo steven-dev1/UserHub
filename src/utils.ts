@@ -1,4 +1,4 @@
-import type { User } from "./types";
+
 
 export const getUsers = async (page: number) => {
   const response = await fetch(`https://reqres.in/api/users?page=${page}`, {
@@ -15,10 +15,6 @@ export const getUsers = async (page: number) => {
   return data;
 }
 
-export const filterUsers = (users: User[], search: string) => {
-  return users.filter((user) => {
-    return user.first_name.toLowerCase().includes(search.toLowerCase()) ||
-      user.last_name.toLowerCase().includes(search.toLowerCase()) ||
-      user.email.toLowerCase().includes(search.toLowerCase());
-  });
-}
+
+
+export const USERS_PER_PAGE = 6;

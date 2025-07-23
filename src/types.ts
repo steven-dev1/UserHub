@@ -19,5 +19,5 @@ export interface UserList {
 export interface PaginationProps {
   page: number;
   setPage: (page: number) => void;
-  userLength: number;
+  totalpages: number;
 }

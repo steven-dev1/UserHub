@@ -2,13 +2,13 @@ import { MoveLeft, MoveRight } from "lucide-react";
 import { Button } from "./Button";
 import type { PaginationProps } from "../types";
 
-export const Pagination = ({ page,setPage,userLength }: PaginationProps) => {
+export const Pagination = ({ page,setPage,totalpages }: PaginationProps) => {
 
-  const totalPages = Math.ceil(userLength / 6);
+  const totalPages = Math.ceil(totalpages / 6);
 
   const handlePageClick = (page: number) => {
-      console.log(totalPages, )
-    if (page < 1 || page > 2) return;
+      console.log(totalPages, page)
+    if (page < 1 || page > totalPages) return;
     setPage(page);
   };
   return (
@@ -31,7 +31,7 @@ export const Pagination = ({ page,setPage,userLength }: PaginationProps) => {
         </div>
       </div>
       <div>
-        <p className="text-sm text-gray-500">Total de usuarios: {userLength}</p>
+        <p className="text-sm text-gray-500">Total de usuarios: {totalpages}</p>
       </div>
     </div>
   );
